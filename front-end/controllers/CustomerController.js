@@ -56,15 +56,32 @@ function saveCustomer() {
         let customerAddress = $("#cusAddress").val();
         let customerSalary = $("#cusSalary").val();
 
-        let newCustomer = Object.assign({}, customer);
-        newCustomer.id = customerId;
-        newCustomer.name = customerName;
-        newCustomer.address = customerAddress;
-        newCustomer.salary = customerSalary;
+        let newCustomer = {
+            id : customerId,
+            name : customerName,
+            address : customerAddress,
+            salary : customerSalary
+        };
 
-        customerDB.push(newCustomer);
-        loadCustomerIDs();
-        getAllCustomer();
+        const jsonObject=JSON.stringify(newCustomer);
+        $.ajax({
+            url:"http://localhost:8080/app/customers",
+            method:"POST",
+            data:jsonObject,
+            contentType:("application/json"),
+
+            success: function (resp){
+                console.log("Success",resp);
+                if (jqxhr.status==201){
+                    alert(jqxhr.responseText);
+                }
+            },
+            error: function (error){
+                console.log("Error",error);
+            }
+        });
+        // loadCustomerIDs();
+        // getAllCustomer();
         clearCustomerInputField();
     }
     else {

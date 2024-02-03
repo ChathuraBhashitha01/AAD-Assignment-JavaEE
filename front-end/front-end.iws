@@ -2,72 +2,73 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e01bae3-761e-408e-8937-46617a3b0c32" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/jquery-3.7.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/portfolioController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/bootstrap/js/portfolioValidation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/css/8.0.1_normalize.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/images/customers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/images/items.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/images/loader.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assest/images/orders.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/CustomerController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/HomePageController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/ItemController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/validation/CustomerValidation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/validation/PlaceOrderValidation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/db.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Customer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Item.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/OrderDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/db/AppContextListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/filter/CORSFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/filter/CORSFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/css/bootstrap.rtl.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.esm.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/jquery-3.6.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/jquery-3.7.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/portfolioController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/bootstrap/js/portfolioValidation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/css/8.0.1_normalize.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/images/customers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/images/items.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/images/loader.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assest/images/orders.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/CustomerController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/HomePageController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ItemController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/validation/CustomerValidation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/validation/PlaceOrderValidation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/db.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end.iws" beforeDir="false" afterPath="$PROJECT_DIR$/front-end.iws" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Customer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Item.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Order.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/OrderDetails.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,19 +89,20 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest" />
       <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end" />
+      <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest\bootstrap\js" />
+      <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest" />
       <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest\bootstrap" />
       <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest\bootstrap\css" />
-      <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest\bootstrap\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -125,7 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706973077859</updated>
       <workItem from="1706973079202" duration="1163000" />
-      <workItem from="1706979321230" duration="3018000" />
+      <workItem from="1706979321230" duration="5561000" />
     </task>
     <servers />
   </component>
