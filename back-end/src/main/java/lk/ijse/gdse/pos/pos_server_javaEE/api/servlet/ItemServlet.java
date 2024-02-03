@@ -7,12 +7,15 @@ import lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.ItemBO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.ItemDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,16 +24,24 @@ import java.util.ArrayList;
 @WebServlet(name = "itemServlet",urlPatterns = "/items")
 public class ItemServlet extends HttpServlet {
     ItemBO itemBO= BoFactory.getBoFactory().getBO(BoFactory.BOType.ITEM_BO);
+    DataSource pool;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            InitialContext initialContext = new InitialContext();
+            pool= (DataSource) initialContext.lookup("java:/comp/env/jdbc/pos");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
-        Connection connection=null;
 
         ArrayList<ItemDTO> items=new ArrayList<>();
-        try {
-            connection= dbcp.getConnection();
+        try(Connection connection=pool.getConnection()) {
             items=itemBO.getAll(connection);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
@@ -42,9 +53,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
-        Connection connection=null;
 
         Jsonb jsonb = JsonbBuilder.create();
         ItemDTO itemDTO = jsonb.fromJson(req.getReader(),ItemDTO.class);
@@ -54,8 +62,7 @@ public class ItemServlet extends HttpServlet {
         }else if (itemDTO.getDescription()==null||itemDTO.getDescription().matches("/^[A-Za-z ]{2,}$/") ){
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Description is empty or invalid");
         }else {
-            try {
-                connection = dbcp.getConnection();
+            try(Connection connection=pool.getConnection()) {
                 boolean isSaved = itemBO.saveItem(itemDTO, connection);
 
                 if (isSaved){
@@ -76,9 +83,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
-        Connection connection=null;
 
         Jsonb jsonb = JsonbBuilder.create();
         ItemDTO itemDTO = jsonb.fromJson(req.getReader(),ItemDTO.class);
@@ -88,8 +92,7 @@ public class ItemServlet extends HttpServlet {
         }else if (itemDTO.getDescription()==null||itemDTO.getDescription().matches("/^[A-Za-z ]{2,}$/") ){
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Description is empty or invalid");
         }else {
-            try {
-                connection = dbcp.getConnection();
+            try(Connection connection=pool.getConnection()) {
                 boolean isUpdated = itemBO.updateItem(itemDTO, connection);
 
                 if (isUpdated){
@@ -108,15 +111,10 @@ public class ItemServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String code = req.getParameter("code");
 
-        ServletContext servletContext = getServletContext();
-        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
-        Connection connection=null;
-
         if (code==null||code.matches("/^(I00-)[0-9]{3}$/") ){
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Code is empty or invalid");
         }else {
-            try {
-                connection = dbcp.getConnection();
+            try(Connection connection=pool.getConnection()) {
                 boolean isDeleted = itemBO.deleteItem(code, connection);
 
                 if (isDeleted){

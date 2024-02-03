@@ -7,12 +7,15 @@ import lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.PlaceOrderBO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.OrderDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,18 +23,25 @@ import java.sql.SQLException;
 @WebServlet(name = "placeOrderServlet",urlPatterns = "/placeorders")
 public class PlaceOrderServlet extends HttpServlet {
     PlaceOrderBO placeOrderBO= BoFactory.getBoFactory().getBO(BoFactory.BOType.PLACE_ORDER_BO);
+    DataSource pool;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            InitialContext initialContext = new InitialContext();
+            pool= (DataSource) initialContext.lookup("java:/comp/env/jdbc/pos");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        BasicDataSource dbcp = (BasicDataSource) servletContext.getAttribute("dbcp");
-        Connection connection=null;
 
         Jsonb jsonb = JsonbBuilder.create();
         OrderDTO orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
 
-        try {
-            connection= dbcp.getConnection();
+        try(Connection connection = pool.getConnection()) {
             boolean isSaved = placeOrderBO.saveOrder(orderDTO,connection);
 
         } catch (SQLException | ClassNotFoundException throwables) {

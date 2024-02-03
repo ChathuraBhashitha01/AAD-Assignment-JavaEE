@@ -14,12 +14,12 @@ public class CORSFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         String origin = req.getHeader("origin");
+//
+//        if (origin==null){
+//            res.sendError(HttpServletResponse.SC_BAD_REQUEST,"CORS Policy Violation");
+//        }
 
-        if (origin==null){
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST,"CORS Policy Violation");
-        }
-
-        res.addHeader("Access-Control-Allow-Origin",origin);
+        res.addHeader("Access-Control-Allow-Origin","*");
         res.addHeader("Access-Control-Allow-Headers","content-Type");
         res.addHeader("Access-Control-Allow-Methods","GET,POST,DELETE,PUT,OPTION");
          chain.doFilter(req,res);

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 @WebServlet(name = "customerServlet",urlPatterns = "/customers")
 public class CustomerServlet extends HttpServlet {
     CustomerBO customerBO= BoFactory.getBoFactory().getBO(BoFactory.BOType.CUSTOMER_BO);
-    Connection connection=null;
     DataSource pool;
 
     @Override
@@ -39,10 +38,8 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ArrayList<CustomerDTO> customerArray= new ArrayList<>();
-        try(Connection con= pool.getConnection()) {
-//            connection = pool.getConnection();
-            System.out.println(con);
-            customerArray = customerBO.getAll(con);
+        try(Connection connection= pool.getConnection()) {
+            customerArray = customerBO.getAll(connection);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -66,8 +63,7 @@ public class CustomerServlet extends HttpServlet {
         }else if (customerDTO.getAddress()==null||customerDTO.getAddress().matches("/^[A-Za-z0-9 ]{5,}$/") ) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Address is empty or invalid");
         }else {
-            try {
-                connection = pool.getConnection();
+            try(Connection connection= pool.getConnection()) {
                 boolean isSaved = customerBO.saveCustomer(customerDTO, connection);
                 if (isSaved){
                     resp.setStatus(HttpServletResponse.SC_CREATED);
@@ -96,8 +92,7 @@ public class CustomerServlet extends HttpServlet {
         }else if (customerDTO.getAddress()==null||customerDTO.getAddress().matches("/^[A-Za-z0-9 ]{5,}$/") ){
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Address is empty or invalid");
         }else {
-            try {
-                connection = pool.getConnection();
+            try(Connection connection= pool.getConnection()) {
                 boolean isUpdated = customerBO.updateCustomer(customerDTO, connection);
 
                 if (isUpdated){
@@ -121,8 +116,7 @@ public class CustomerServlet extends HttpServlet {
         if (id==null||id.matches("/^(C00-)[0-9]{3}$/") ){
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"ID is empty or invalid");
         }else {
-            try {
-                connection = pool.getConnection();
+            try(Connection connection= pool.getConnection()) {
                 boolean isDelete = customerBO.deleteCustomer(id, connection);
 
                 if (isDelete){
