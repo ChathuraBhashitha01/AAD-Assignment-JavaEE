@@ -14,7 +14,9 @@
       <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/db/AppContextListener.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CustomerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CustomerController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/validation/CustomerValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/validation/CustomerValidation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ItemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ItemController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end.iws" beforeDir="false" afterPath="$PROJECT_DIR$/front-end.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +26,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="2brVEg0Qwuf2DFdaj92EkrWLqzM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -62,7 +72,7 @@
       <updated>1706973077859</updated>
       <workItem from="1706973079202" duration="1163000" />
       <workItem from="1706979321230" duration="9016000" />
-      <workItem from="1707023259255" duration="3080000" />
+      <workItem from="1707023259255" duration="13755000" />
     </task>
     <servers />
   </component>

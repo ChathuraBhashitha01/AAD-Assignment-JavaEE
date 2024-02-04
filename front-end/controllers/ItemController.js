@@ -1,4 +1,4 @@
-getAllItems();
+//getAllItems();
 loadItemCodes();
 
 $("#navItem").click(function (){
@@ -24,16 +24,16 @@ $("#btnItemGetAll").click(function (){
 
 $("#btnItemDelete").click(function (){
     deleteItem();
-    loadItemCodes();
-    getAllItems();
-    clearItemInputField();
+    // loadItemCodes();
+    // getAllItems();
+    // clearItemInputField();
 });
 
 $("#btnItemUpdate").click(function (){
     updateItem();
-    getAllItems();
-    loadItemCodes();
-    clearItemInputField();
+    // getAllItems();
+    // loadItemCodes();
+    // clearItemInputField();
 });
 
 $("#btnItemSearch").click(function (){
@@ -56,16 +56,29 @@ function saveItem() {
         let price = $("#txtItemPrice").val();
         let qty = $("#txtItemQty").val();
 
-        let newItem = Object.assign({}, item);
-        newItem.code = code;
-        newItem.description = name;
-        newItem.unitPrice = price;
-        newItem.qtyOnHand = qty;
+        let newItem = {
+            code : code,
+            description : name,
+            unitPrice : price,
+            qtyOnHand : qty
+        };
 
-        itemDB.push(newItem);
-        loadItemCodes();
-        getAllItems();
-        clearItemInputField();
+        const jsonObject=JSON.stringify(newItem);
+        $.ajax({
+            url:"http://localhost:8080/app/items",
+            method:"POST",
+            data:jsonObject,
+
+            success:function (resp,jqxhr){
+                if (jqxhr.status==201){
+                    alert(jqxhr.responseText);
+                }
+            }
+        });
+
+        // loadItemCodes();
+        // getAllItems();
+        // clearItemInputField();
     }
     else {
         alert("Item already exits.!");
@@ -82,21 +95,44 @@ function searchItem(code){
 function getAllItems(){
     $("#tblItem").empty();
 
-    for (let i = 0; i < itemDB.length; i++) {
-        let code=itemDB[i].code;
-        let name=itemDB[i].description;
-        let price=itemDB[i].unitPrice;
-        let qty=itemDB[i].qtyOnHand;
+    // for (let i = 0; i < itemDB.length; i++) {
+    //     let code=itemDB[i].code;
+    //     let name=itemDB[i].description;
+    //     let price=itemDB[i].unitPrice;
+    //     let qty=itemDB[i].qtyOnHand;
+    //
+    //     let row=`<tr>
+    //                 <td>${code}</td>
+    //                 <td>${name}</td>
+    //                 <td>${price}</td>
+    //                 <td>${qty}</td>
+    //             </tr>`;
+    //     $("#tblItem").append(row);
+    //     bindTrEvents();
+    // }
 
-        let row=`<tr>
-                    <td>${code}</td>
-                    <td>${name}</td>
-                    <td>${price}</td>
-                    <td>${qty}</td>
-                </tr>`;
-        $("#tblItem").append(row);
-        bindTrEvents();
-    }
+    $.ajax({
+        url:"http://localhost:8080/app/items",
+        method:"GET",
+
+        success:function (resp){
+            console.log("Success : ",resp)
+
+            for (const item of resp) {
+
+                const row = `<tr>
+                                <td>${item.code}</td>
+                                <td>${item.description}</td>
+                                <td>${item.qtyOnHand}</td>
+                                <td>${item.unitPrice}</td>
+                            </tr>`;
+                $('#tblItem').append(row);
+            }
+        },
+        error:function (error){
+            console.log("error : "+error)
+        }
+    });
 }
 function bindTrEvents() {
     $("#tblItem>tr").click(function (){
@@ -121,39 +157,65 @@ function loadItemCodes(){
 
 function deleteItem(){
     let id=$("#txtItemCode").val();
-    if (searchItem(id) == undefined) {
-        alert("No such Customer..please check the ID");
-    } else {
-        let consent = confirm("Do you really want to Delete this item.?");
-        if (consent) {
-            for (let i = 0; i < itemDB.length; i++) {
-                if (itemDB[i].code == id) {
-                    itemDB.splice(i, 1);
-                    return true;
-                }
+    // if (searchItem(id) == undefined) {
+    //     alert("No such Customer..please check the ID");
+    // } else {
+    //     let consent = confirm("Do you really want to Delete this item.?");
+    //     if (consent) {
+    //         for (let i = 0; i < itemDB.length; i++) {
+    //             if (itemDB[i].code == id) {
+    //                 itemDB.splice(i, 1);
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    // }
+    // return false;
+
+    $.ajax({
+        url:"http://localhost:8080/app/items?id="+id,
+        method:"DELETE",
+
+        success:function (resp,jqxhr){
+            if (jqxhr.status==201){
+                alert(jqxhr.responseText);
             }
         }
-    }
-    return false;
+    });
 }
 
 function updateItem(){
     let id=$("#txtItemCode").val();
-    if (searchItem(id) == undefined) {
-        alert("No such Customer..please check the ID");
-    } else {
-        let consent = confirm("Do you really want to update this item.?");
-        if (consent) {
-            let item = searchItem(id);
+    // if (searchItem(id) == undefined) {
+    //     alert("No such Customer..please check the ID");
+    // } else {
+    //     let consent = confirm("Do you really want to update this item.?");
+    //     if (consent) {
+     //       let item = searchItem(id);
 
             let name = $("#txtItemName").val();
             let price = $("#txtItemPrice").val();
             let qty = $("#txtItemQty").val();
 
-            item.description = name;
-            item.unitPrice = price;
-            item.qtyOnHand = qty;
+            let newItem = {
+                code : id,
+                description : name,
+                unitPrice : price,
+                qtyOnHand : qty
+            };
 
-        }
-    }
+            const jsonObject=JSON.stringify(newItem);
+            $.ajax({
+                url:"http://localhost:8080/app/items",
+                method:"PUT",
+                data:jsonObject,
+
+                success:function (resp,jqxhr){
+                    if (jqxhr.status==201){
+                        alert(jqxhr.responseText);
+                    }
+                }
+            });
+    //     }
+    // }
 }

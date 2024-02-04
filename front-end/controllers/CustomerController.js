@@ -70,7 +70,7 @@ function saveCustomer() {
             data:jsonObject,
             contentType:("application/json"),
 
-            success: function (resp){
+            success: function (resp,jqxhr){
                 console.log("Success",resp);
                 if (jqxhr.status==201){
                     alert(jqxhr.responseText);
@@ -107,6 +107,9 @@ function getAllCustomer(){
             console.log("Success : ",resp)
 
             for (const customer of resp) {
+                console.log(customer.id);
+                console.log(customer.name);
+                console.log(customer.address);
 
                 const row = `<tr>
                                 <td>${customer.id}</td>

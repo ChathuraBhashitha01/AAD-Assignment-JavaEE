@@ -114,51 +114,52 @@ $("#btnAddItem").click(function () {
 
 function placeOrder(){
     let orderId=$("#txtOrderId").val();
-    if(searchOrder(orderId.trim()) == undefined){
-        let cusId=$("#cmbCustomer").val();
-        let date=$("#txtDate").val();
-        let itemName=$("#txtGetItemName").val();
-        let itemQtyOnHand=$("#txtGetQtyOnHand").val();
+    let cusId=$("#cmbCustomer").val();
+    let date=$("#txtDate").val();
+    let total=$("#txtSubtotal").val();
 
-        let code=0;
-        let qty=0;
-        let price=0;
-        let orderDetailArray=[];
+    let orderDetailArray=[];
+    let code="";
+    let qty=0;
+    let price=0;
+    $('#tblPlaceOrder>tr').each(function () {
+         code = $(this).children().eq(0).text();
+         qty = $(this).children().eq(3).text();
+         price = $(this).children().eq(2).text();
 
-        $('#tblPlaceOrder>tr').each(function () {
-             code = $(this).children().eq(0).text();
-             qty = $(this).children().eq(3).text();
-             price = $(this).children().eq(2).text();
+         let orderDetail= {
+            oid: orderId,
+            code: code,
+            qty:  qty,
+            unitPrice:  price
+        };
+         orderDetailArray.push(orderDetail);
+    });
 
-            let orderDetail= orderDetails={
-                oid: orderId,
-                code: code,
-                qty:  qty,
-                unitPrice:  price
-            };
-            orderDetailArray.push(orderDetail)
-        });
+    const placeOrder={
+      orderID:orderId,
+      date:date,
+      customerID:cusId,
+      total:total,
+      orderDetails:orderDetailArray
+    };
+    const jsonObject=JSON.stringify(placeOrder);
+    $.ajax({
+        url:"http://localhost:8080/app/placeorders",
+        method:"POST",
+        data:jsonObject,
+        contentType:("application/json"),
 
-       let purchaseOrder= order={
-            oid:orderId,
-            date:date,
-            customerID:cusId,
-            orderDetails: orderDetailArray
+        success: function (resp,jqxhr){
+            console.log("Success",resp);
+            if (jqxhr.status==201){
+                alert(jqxhr.responseText);
+            }
+        },
+        error: function (error){
+            console.log("Error",error);
         }
-
-        let item = searchItem(code);
-        item.description=itemName;
-        item.unitPrice=price;
-        item.qtyOnHand=(itemQtyOnHand-qty);
-
-        let isSaved=orderDB.push(purchaseOrder);
-        console.log(orderDB);
-        console.log(isSaved);
-    }
-    else {
-        alert("Order id already exits.!");
-        clearCustomerInputField();
-    }
+    });
 };
 function searchOrder(id){
     return orderDB.find(function (order){
