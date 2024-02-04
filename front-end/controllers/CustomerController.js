@@ -41,14 +41,13 @@ $("#btnCustomerGetAll").click(function (){
 $("#btnCustomerDelete").click(function (){
     deleteCustomer();
     loadCustomerIDs();
-    // getAllCustomer();
-    // clearCustomerInputField();
+    clearCustomerInputField();
 });
 
 $("#btnCustomerUpdate").click(function (){
     updateCustomer();
-    // getAllCustomer();
-    // clearCustomerInputField();
+    loadCustomerIDs();
+    clearCustomerInputField();
 });
 
 $("#btnCustomerSearch").click(function (){
@@ -97,11 +96,11 @@ function saveCustomer() {
             }
         });
          loadCustomerIDs();
-       // clearCustomerInputField();
+         clearCustomerInputField();
     }
     else {
         alert("Customer already exits.!");
-        //clearCustomerInputField();
+        clearCustomerInputField();
     }
 }
 
@@ -147,47 +146,62 @@ function loadCustomerIDs(){
 }
 function deleteCustomer(){
     let id=$("#cusId").val();
-    $.ajax({
-        url:"http://localhost:8080/app/customers?id="+id,
-        method:"DELETE",
-       success:function (resp,jqxhr){
-           if (jqxhr.status==201){
-               alert(jqxhr.responseText);
-           }
-       },
-        error: function (error) {
+    if (searchCustomer(id) == undefined) {
+        alert("No such Customer..please check the ID");
+    } else {
+        let consent = confirm("Do you really want to Delete this customer.?");
+        if (consent) {
+            $.ajax({
+                url: "http://localhost:8080/app/customers?id=" + id,
+                method: "DELETE",
+                success: function (resp, jqxhr) {
+                    if (jqxhr.status == 201) {
+                        alert(jqxhr.responseText);
+                    }
+                },
+                error: function (error) {
 
+                }
+            });
         }
-    });
+    }
 }
 
 function updateCustomer(){
     let id=$("#cusId").val();
-    let name = $("#cusName").val();
-    let address = $("#cusAddress").val();
-    let salary = $("#cusSalary").val();
 
-    let newCustomer = {
-        id : id,
-        name : name,
-        address : address,
-        salary : salary
-    };
+    if (searchCustomer(id) == undefined) {
+        alert("No such Customer..please check the ID");
+    } else {
+        let consent = confirm("Do you really want to update this customer.?");
+        if (consent) {
+            let name = $("#cusName").val();
+            let address = $("#cusAddress").val();
+            let salary = $("#cusSalary").val();
 
-    const jsonObject=JSON.stringify(newCustomer);
-    $.ajax({
-        url:"http://localhost:8080/app/customers",
-        method:"PUT",
-        data:jsonObject,
-        contentType:("application/json"),
+            let newCustomer = {
+                id: id,
+                name: name,
+                address: address,
+                salary: salary
+            };
 
-        success: function (resp,jqxhr){
-            if (jqxhr.status==201){
-                alert(jqxhr.responseText);
-            }
-        },
-        error: function (error){
-            console.log("Error",error);
+            const jsonObject = JSON.stringify(newCustomer);
+            $.ajax({
+                url: "http://localhost:8080/app/customers",
+                method: "PUT",
+                data: jsonObject,
+                contentType: ("application/json"),
+
+                success: function (resp, jqxhr) {
+                    if (jqxhr.status == 201) {
+                        alert(jqxhr.responseText);
+                    }
+                },
+                error: function (error) {
+                    console.log("Error", error);
+                }
+            });
         }
-    });
-}
+    }
+};
