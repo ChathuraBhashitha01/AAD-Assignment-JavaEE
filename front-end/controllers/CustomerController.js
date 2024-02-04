@@ -19,12 +19,28 @@ $("#btnSaveCustomer").click(function (){
 });
 
 $("#btnCustomerGetAll").click(function (){
-    getAllCustomer();
+    $("#tblCustomer").empty();
+
+    for (let i = 0; i < customerDB.length; i++) {
+        let customerId=customerDB[i].id;
+        let customerName=customerDB[i].name;
+        let customerAddress=customerDB[i].address;
+        let customerSalary=customerDB[i].salary;
+
+        let row=`<tr>
+                    <td>${customerId}</td>
+                    <td>${customerName}</td>
+                    <td>${customerAddress}</td>
+                    <td>${customerSalary}</td>
+                </tr>`;
+        $("#tblCustomer").append(row);
+        bindCusTrEvents();
+    }
 });
 
 $("#btnCustomerDelete").click(function (){
     deleteCustomer();
-    // loadCustomerIDs();
+    loadCustomerIDs();
     // getAllCustomer();
     // clearCustomerInputField();
 });
@@ -80,8 +96,7 @@ function saveCustomer() {
                 console.log("Error",error);
             }
         });
-        // loadCustomerIDs();
-        // getAllCustomer();
+         loadCustomerIDs();
        // clearCustomerInputField();
     }
     else {
@@ -94,37 +109,6 @@ function searchCustomer(id){
     return customerDB.find(function (customer){
         return customer.id==id;
     });
-}
-
-function getAllCustomer(){
-    $("#tblCustomer").empty();
-
-    $.ajax({
-        url:"http://localhost:8080/app/customers",
-        method:"GET",
-
-        success:function (resp){
-            console.log("Success : ",resp)
-
-            for (const customer of resp) {
-                console.log(customer.id);
-                console.log(customer.name);
-                console.log(customer.address);
-
-                const row = `<tr>
-                                <td>${customer.id}</td>
-                                <td>${customer.name}</td>
-                                <td>${customer.address}</td>
-                                <td>${customer.salary}</td>
-                            </tr>`;
-                $('#tblCustomer').append(row);
-            }
-        },
-        error:function (error){
-            console.log("error : "+error)
-        }
-    });
-
 }
 function bindCusTrEvents() {
     $("#tblCustomer>tr").click(function (){
@@ -141,29 +125,28 @@ function bindCusTrEvents() {
 }
 function loadCustomerIDs(){
     $("#cmbCustomerID").empty();
-    for (let i = 0; i <customerDB.length ; i++) {
-        let id=customerDB[i].id;
-        $("#cmbCustomerID").append("<option >"+id +"</option>");
-    }
+    $.ajax({
+        url:"http://localhost:8080/app/customers",
+        method:"GET",
+        dataType:"json",
+        success:function (resp){
+            console.log("Success : ",resp)
+
+            for (const customer of resp) {
+                $("#cmbCustomerID").append("<option >"+customer.id+"</option>");
+                const customerDetails={
+                    id:customer.id,
+                    name:customer.name,
+                    address:customer.address,
+                    salary:customer.salary
+                }
+                customerDB.push(customerDetails);
+            }
+        }
+    });
 }
 function deleteCustomer(){
     let id=$("#cusId").val();
-    // if (searchCustomer(id) == undefined) {
-    //     alert("No such Customer..please check the ID");
-    // } else {
-    //     let consent = confirm("Do you really want to Delete this customer.?");
-    //     if (consent) {
-    //         for (let i = 0; i < customerDB.length; i++) {
-    //             if (customerDB[i].id == id) {
-    //                 customerDB.splice(i, 1);
-    //                 return true;
-    //             }
-    //         }
-    //
-    //     }
-    // }
-    // return false;
-
     $.ajax({
         url:"http://localhost:8080/app/customers?id="+id,
         method:"DELETE",
@@ -183,23 +166,6 @@ function updateCustomer(){
     let name = $("#cusName").val();
     let address = $("#cusAddress").val();
     let salary = $("#cusSalary").val();
-    // if (searchCustomer(id) == undefined) {
-    //     alert("No such Customer..please check the ID");
-    // } else {
-    //     let consent = confirm("Do you really want to update this customer.?");
-    //     if (consent) {
-    //         let customer = searchCustomer(id);
-    //
-    //         let customerName = $("#cusName").val();
-    //         let customerAddress = $("#cusAddress").val();
-    //         let customerSalary = $("#cusSalary").val();
-    //
-    //         customer.name = customerName;
-    //         customer.address = customerAddress;
-    //         customer.salary = customerSalary;
-    //
-    //     }
-    // }
 
     let newCustomer = {
         id : id,

@@ -15,8 +15,6 @@
       <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/db/AppContextListener.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CustomerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CustomerController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/ItemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ItemController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/validation/ItemValidation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front-end.iws" beforeDir="false" afterPath="$PROJECT_DIR$/front-end.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +70,8 @@
       <updated>1706973077859</updated>
       <workItem from="1706973079202" duration="1163000" />
       <workItem from="1706979321230" duration="9016000" />
-      <workItem from="1707023259255" duration="13755000" />
+      <workItem from="1707023259255" duration="13833000" />
+      <workItem from="1707058603450" duration="4865000" />
     </task>
     <servers />
   </component>
