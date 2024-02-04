@@ -1,4 +1,4 @@
-getAllCustomer();
+
 loadCustomerIDs();
 
 $("#navCustomer").click(function (){
@@ -24,15 +24,15 @@ $("#btnCustomerGetAll").click(function (){
 
 $("#btnCustomerDelete").click(function (){
     deleteCustomer();
-    loadCustomerIDs();
-    getAllCustomer();
-    clearCustomerInputField();
+    // loadCustomerIDs();
+    // getAllCustomer();
+    // clearCustomerInputField();
 });
 
 $("#btnCustomerUpdate").click(function (){
     updateCustomer();
-    getAllCustomer();
-    clearCustomerInputField();
+    // getAllCustomer();
+    // clearCustomerInputField();
 });
 
 $("#btnCustomerSearch").click(function (){
@@ -82,11 +82,11 @@ function saveCustomer() {
         });
         // loadCustomerIDs();
         // getAllCustomer();
-        clearCustomerInputField();
+       // clearCustomerInputField();
     }
     else {
         alert("Customer already exits.!");
-        clearCustomerInputField();
+        //clearCustomerInputField();
     }
 }
 
@@ -99,21 +99,29 @@ function searchCustomer(id){
 function getAllCustomer(){
     $("#tblCustomer").empty();
 
-    for (let i = 0; i < customerDB.length; i++) {
-        let customerId=customerDB[i].id;
-        let customerName=customerDB[i].name;
-        let customerAddress=customerDB[i].address;
-        let customerSalary=customerDB[i].salary;
+    $.ajax({
+        url:"http://localhost:8080/app/customers",
+        method:"GET",
 
-        let row=`<tr>
-                    <td>${customerId}</td>
-                    <td>${customerName}</td>
-                    <td>${customerAddress}</td>
-                    <td>${customerSalary}</td>
-                </tr>`;
-        $("#tblCustomer").append(row);
-        bindCusTrEvents();
-    }
+        success:function (resp){
+            console.log("Success : ",resp)
+
+            for (const customer of resp) {
+
+                const row = `<tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.name}</td>
+                                <td>${customer.address}</td>
+                                <td>${customer.salary}</td>
+                            </tr>`;
+                $('#tblCustomer').append(row);
+            }
+        },
+        error:function (error){
+            console.log("error : "+error)
+        }
+    });
+
 }
 function bindCusTrEvents() {
     $("#tblCustomer>tr").click(function (){
@@ -137,40 +145,80 @@ function loadCustomerIDs(){
 }
 function deleteCustomer(){
     let id=$("#cusId").val();
-    if (searchCustomer(id) == undefined) {
-        alert("No such Customer..please check the ID");
-    } else {
-        let consent = confirm("Do you really want to Delete this customer.?");
-        if (consent) {
-            for (let i = 0; i < customerDB.length; i++) {
-                if (customerDB[i].id == id) {
-                    customerDB.splice(i, 1);
-                    return true;
-                }
-            }
+    // if (searchCustomer(id) == undefined) {
+    //     alert("No such Customer..please check the ID");
+    // } else {
+    //     let consent = confirm("Do you really want to Delete this customer.?");
+    //     if (consent) {
+    //         for (let i = 0; i < customerDB.length; i++) {
+    //             if (customerDB[i].id == id) {
+    //                 customerDB.splice(i, 1);
+    //                 return true;
+    //             }
+    //         }
+    //
+    //     }
+    // }
+    // return false;
+
+    $.ajax({
+        url:"http://localhost:8080/app/customers?id="+id,
+        method:"DELETE",
+       success:function (resp,jqxhr){
+           if (jqxhr.status==201){
+               alert(jqxhr.responseText);
+           }
+       },
+        error: function (error) {
 
         }
-    }
-    return false;
+    });
 }
 
 function updateCustomer(){
     let id=$("#cusId").val();
-    if (searchCustomer(id) == undefined) {
-        alert("No such Customer..please check the ID");
-    } else {
-        let consent = confirm("Do you really want to update this customer.?");
-        if (consent) {
-            let customer = searchCustomer(id);
+    let name = $("#cusName").val();
+    let address = $("#cusAddress").val();
+    let salary = $("#cusSalary").val();
+    // if (searchCustomer(id) == undefined) {
+    //     alert("No such Customer..please check the ID");
+    // } else {
+    //     let consent = confirm("Do you really want to update this customer.?");
+    //     if (consent) {
+    //         let customer = searchCustomer(id);
+    //
+    //         let customerName = $("#cusName").val();
+    //         let customerAddress = $("#cusAddress").val();
+    //         let customerSalary = $("#cusSalary").val();
+    //
+    //         customer.name = customerName;
+    //         customer.address = customerAddress;
+    //         customer.salary = customerSalary;
+    //
+    //     }
+    // }
 
-            let customerName = $("#cusName").val();
-            let customerAddress = $("#cusAddress").val();
-            let customerSalary = $("#cusSalary").val();
+    let newCustomer = {
+        id : id,
+        name : name,
+        address : address,
+        salary : salary
+    };
 
-            customer.name = customerName;
-            customer.address = customerAddress;
-            customer.salary = customerSalary;
+    const jsonObject=JSON.stringify(newCustomer);
+    $.ajax({
+        url:"http://localhost:8080/app/customers",
+        method:"PUT",
+        data:jsonObject,
+        contentType:("application/json"),
 
+        success: function (resp,jqxhr){
+            if (jqxhr.status==201){
+                alert(jqxhr.responseText);
+            }
+        },
+        error: function (error){
+            console.log("Error",error);
         }
-    }
+    });
 }
