@@ -4,6 +4,7 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import lk.ijse.gdse.pos.pos_server_javaEE.bo.BoFactory;
 import lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.PlaceOrderBO;
+import lk.ijse.gdse.pos.pos_server_javaEE.dto.ItemDTO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.OrderDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -19,6 +20,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet(name = "placeOrderServlet",urlPatterns = "/placeorders")
 public class PlaceOrderServlet extends HttpServlet {
@@ -48,5 +50,18 @@ public class PlaceOrderServlet extends HttpServlet {
             throwables.printStackTrace();
         }
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ArrayList<OrderDTO> orderDTOS=new ArrayList<>();
+        try(Connection connection=pool.getConnection()) {
+            orderDTOS=placeOrderBO.getAll(connection);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+
+        Jsonb jsonb = JsonbBuilder.create();
+        jsonb.toJson(orderDTOS,resp.getWriter());
     }
 }

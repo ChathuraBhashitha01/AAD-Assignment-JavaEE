@@ -38,12 +38,13 @@ public class OrderaDetailDAOImpl implements OrderDetailsDAO {
     }
 
     @Override
-    public OrderDetail search(String id, Connection connection) throws SQLException, ClassNotFoundException {
+    public  ArrayList<OrderDetail> search(String id, Connection connection) throws SQLException, ClassNotFoundException {
+        ArrayList<OrderDetail> orders=new ArrayList<>();
         String sql="SELECT * FROM orderdetail WHERE orderID=?";
         ResultSet resultSet= SQLUtil.execute(sql,connection,id);
         if(resultSet.next()){
-            return new OrderDetail(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getDouble(4));
+           orders.add(new OrderDetail(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getDouble(4)));
         }
-        return null;
+        return orders;
     }
 }

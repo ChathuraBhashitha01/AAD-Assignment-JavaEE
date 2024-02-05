@@ -3,6 +3,7 @@ package lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.impl;
 import lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.ItemBO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.CrudDAO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.DAOFactory;
+import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.ItemDAO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.ItemDTO;
 import lk.ijse.gdse.pos.pos_server_javaEE.entity.Item;
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ItemBOImpl implements ItemBO {
-    CrudDAO itemDAO= DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ITEM_DAO);
+    ItemDAO itemDAO= DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ITEM_DAO);
 
     @Override
     public ArrayList<ItemDTO> getAll(Connection connection) throws SQLException, ClassNotFoundException {

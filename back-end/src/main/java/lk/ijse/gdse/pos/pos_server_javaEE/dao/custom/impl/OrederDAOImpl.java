@@ -2,6 +2,7 @@ package lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.impl;
 
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.OrderDAO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.impl.util.SQLUtil;
+import lk.ijse.gdse.pos.pos_server_javaEE.entity.Item;
 import lk.ijse.gdse.pos.pos_server_javaEE.entity.Placeorder;
 
 import java.sql.Connection;
@@ -13,7 +14,12 @@ public class OrederDAOImpl implements OrderDAO {
 
     @Override
     public ArrayList<Placeorder> getAll(Connection connection) throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Placeorder> placeorders=new ArrayList<>();
+        ResultSet resultSet=SQLUtil.execute("SELECT * FROM placeorder",connection);
+        while (resultSet.next()){
+            placeorders.add(new Placeorder(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getDouble(4)));
+        }
+        return placeorders;
     }
 
     @Override
@@ -33,7 +39,12 @@ public class OrederDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Placeorder search(String id, Connection connection) throws SQLException, ClassNotFoundException {
+    public ArrayList<Placeorder> search(String s, Connection connection) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public Placeorder searchByID(String id, Connection connection) throws SQLException, ClassNotFoundException {
         String sql="SELECT * FROM placeorder WHERE orderID=?";
         ResultSet resultSet= SQLUtil.execute(sql,connection,id);
         if(resultSet.next()){

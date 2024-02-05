@@ -41,12 +41,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public Customer search(String id, Connection connection) throws SQLException, ClassNotFoundException {
-        String sql="SELECT * FROM customer WHERE id=?";
-        ResultSet resultSet= SQLUtil.execute(sql,connection,id);
-        if(resultSet.next()){
-            return new Customer(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getDouble(4));
-        }
+    public ArrayList<Customer> search(String s, Connection connection) throws SQLException, ClassNotFoundException {
         return null;
     }
 

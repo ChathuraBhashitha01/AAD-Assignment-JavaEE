@@ -3,19 +3,46 @@ package lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.impl;
 import lk.ijse.gdse.pos.pos_server_javaEE.bo.custom.PlaceOrderBO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.CrudDAO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dao.DAOFactory;
+import lk.ijse.gdse.pos.pos_server_javaEE.dao.SuperDAO;
+import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.ItemDAO;
+import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.OrderDAO;
+import lk.ijse.gdse.pos.pos_server_javaEE.dao.custom.OrderDetailsDAO;
+import lk.ijse.gdse.pos.pos_server_javaEE.dto.ItemDTO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.OrderDTO;
 import lk.ijse.gdse.pos.pos_server_javaEE.dto.OrderDetailDTO;
 import lk.ijse.gdse.pos.pos_server_javaEE.entity.Item;
 import lk.ijse.gdse.pos.pos_server_javaEE.entity.OrderDetail;
 import lk.ijse.gdse.pos.pos_server_javaEE.entity.Placeorder;
 
+import javax.servlet.ServletException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PlaceOrderBOImpl implements PlaceOrderBO {
-    CrudDAO itemDAO= DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ITEM_DAO);
-    CrudDAO placeOrderDAO=DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ORDER_DAO);
-    CrudDAO orderDetailDAO=DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ORDER_DETAIL_DAO);
+    ItemDAO itemDAO= DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ITEM_DAO);
+    OrderDAO placeOrderDAO=DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ORDER_DAO);
+    OrderDetailsDAO orderDetailDAO=DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ORDER_DETAIL_DAO);
+
+    @Override
+    public ArrayList<OrderDTO> getAll(Connection connection) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        ArrayList<Placeorder> placeorders=placeOrderDAO.getAll(connection);
+        ArrayList<OrderDTO> orderDTOS=new ArrayList<>();
+        for (Placeorder i:placeorders) {
+
+            ArrayList<OrderDetailDTO> orderDetailDTOs=new ArrayList<>();
+            ArrayList<OrderDetail> orderDetails=orderDetailDAO.search(i.getOrderID(),connection);
+
+            for (OrderDetail orderDetail:orderDetails) {
+                orderDetailDTOs.add(new OrderDetailDTO(orderDetail.getOrderID(),orderDetail.getItemCode(),orderDetail.getQty(),orderDetail.getPrice()));
+            }
+
+            orderDTOS.add(new OrderDTO(i.getOrderID(),i.getDate(),i.getCustomerID(),i.getTotal(),orderDetailDTOs));
+        }
+        return orderDTOS;
+    }
+
     @Override
     public boolean saveOrder(OrderDTO dto,Connection connection) throws SQLException, ClassNotFoundException {
 
@@ -36,7 +63,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
                     return false;
                 }
 
-                Item item= (Item) itemDAO.search(entity.getItemCode(), connection);
+                Item item= (Item) itemDAO.searchByID(entity.getItemCode(), connection);
                 item.setQtyOnHand(item.getQtyOnHand()-entity.getQty());
 
                 boolean isUpdate = itemDAO.update(item, connection);

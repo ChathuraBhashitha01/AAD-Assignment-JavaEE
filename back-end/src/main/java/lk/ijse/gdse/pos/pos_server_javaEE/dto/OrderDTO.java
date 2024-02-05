@@ -16,4 +16,7 @@ public class OrderDTO {
     private double total;
     private List<OrderDetailDTO> orderDetails;
 
+    public OrderDTO(String orderID, String date, String customerID, double total) {
+
+    }
 }
