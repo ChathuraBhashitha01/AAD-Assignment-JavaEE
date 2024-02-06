@@ -52,4 +52,37 @@ public class OrederDAOImpl implements OrderDAO {
         }
         return null;
     }
+
+    @Override
+    public String getNextId(Connection connection) throws SQLException {
+        String sql="SELECT orderID FROM placeorder ORDER BY orderID DESC LIMIT 1";
+        ResultSet resultSet=SQLUtil.execute(sql,connection);
+        if (resultSet.next()){
+            return splitId(resultSet.getString(1));
+        }
+        return splitId(null);
+    }
+
+    @Override
+    public String splitId(String id) {
+        if(id != null) {
+            String[] strings = id.split("OR00-00");
+            int ids = Integer.parseInt(strings[1]);
+            if(ids==9){
+                String[] strings2 = id.split("OR00-0");
+                int ids2 = Integer.parseInt(strings2[1]);
+                if(ids2==99){
+                    String[] strings3 = id.split("OR00-");
+                    int ids3 = Integer.parseInt(strings2[1]);
+                    ids3++;
+                    return "OR00-" + ids3;
+                }
+                ids2++;
+                return "OR00-0" + ids2;
+            }
+            ids++;
+            return "OR00-00" + ids;
+        }
+        return "OR00-001";
+    }
 }

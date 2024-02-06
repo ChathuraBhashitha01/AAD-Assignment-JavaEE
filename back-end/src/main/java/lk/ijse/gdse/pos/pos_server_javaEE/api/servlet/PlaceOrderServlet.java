@@ -54,14 +54,13 @@ public class PlaceOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<OrderDTO> orderDTOS=new ArrayList<>();
-        try(Connection connection=pool.getConnection()) {
-            orderDTOS=placeOrderBO.getAll(connection);
+        String id=null;
+        try(Connection connection = pool.getConnection()) {
+          id =placeOrderBO.getOrderID(connection);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
 
-        Jsonb jsonb = JsonbBuilder.create();
-        jsonb.toJson(orderDTOS,resp.getWriter());
+        resp.getWriter().write(id);
     }
 }

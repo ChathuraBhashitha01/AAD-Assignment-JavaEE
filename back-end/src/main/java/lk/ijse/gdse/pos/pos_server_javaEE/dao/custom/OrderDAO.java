@@ -9,4 +9,6 @@ import java.sql.SQLException;
 
 public interface OrderDAO extends CrudDAO<Placeorder,String> {
     Placeorder searchByID(String id, Connection connection) throws SQLException, ClassNotFoundException;
+    String getNextId(Connection connection) throws SQLException;
+    String splitId(String id);
 }

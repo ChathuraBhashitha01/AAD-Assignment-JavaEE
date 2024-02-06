@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface PlaceOrderBO extends SuperBO {
-    ArrayList<OrderDTO> getAll(Connection connection) throws ServletException, IOException, SQLException, ClassNotFoundException;
+    String getOrderID(Connection connection) throws ServletException, IOException, SQLException, ClassNotFoundException;
     boolean saveOrder(OrderDTO dto, Connection connection) throws SQLException, ClassNotFoundException;
 
 }

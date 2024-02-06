@@ -26,21 +26,8 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
     OrderDetailsDAO orderDetailDAO=DAOFactory.getDaoFactory().getDao(DAOFactory.DAOType.ORDER_DETAIL_DAO);
 
     @Override
-    public ArrayList<OrderDTO> getAll(Connection connection) throws ServletException, IOException, SQLException, ClassNotFoundException {
-        ArrayList<Placeorder> placeorders=placeOrderDAO.getAll(connection);
-        ArrayList<OrderDTO> orderDTOS=new ArrayList<>();
-        for (Placeorder i:placeorders) {
-
-            ArrayList<OrderDetailDTO> orderDetailDTOs=new ArrayList<>();
-            ArrayList<OrderDetail> orderDetails=orderDetailDAO.search(i.getOrderID(),connection);
-
-            for (OrderDetail orderDetail:orderDetails) {
-                orderDetailDTOs.add(new OrderDetailDTO(orderDetail.getOrderID(),orderDetail.getItemCode(),orderDetail.getQty(),orderDetail.getPrice()));
-            }
-
-            orderDTOS.add(new OrderDTO(i.getOrderID(),i.getDate(),i.getCustomerID(),i.getTotal(),orderDetailDTOs));
-        }
-        return orderDTOS;
+    public String getOrderID(Connection connection) throws ServletException, IOException, SQLException, ClassNotFoundException {
+        return placeOrderDAO.getNextId(connection);
     }
 
     @Override
