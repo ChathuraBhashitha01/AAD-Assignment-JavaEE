@@ -6,8 +6,8 @@ genarateOrderIDs();
 setCurrentDate();
 
 $("#navPlaceOrder").click(function (){
-    loadCustomerIDs();
-    loadItemsCodes();
+    // loadCustomerIDs();
+    // loadItemsCodes();
     $("#navPlaceOrder").css( "font-weight","bold")
     $("#navCustomer").css( "font-weight","normal")
     $("#navItem").css( "font-weight","normal")
@@ -33,15 +33,36 @@ $("#btnPurchase").click(function (){
 })
 
 function loadCustomerIDs(){
-    $("#cmbCustomer").empty();
-    for (let i = 0; i <customerDB.length ; i++) {
-        let id=customerDB[i].id;
-        $("#cmbCustomer").append("<option >"+id +"</option>");
+    if (customerDB.length==0) {
+        $("#cmbCustomer").empty();
+        $.ajax({
+            url:"http://localhost:8080/app/customers",
+            method:"GET",
+            dataType:"json",
+            success:function (resp){
+                for (const customer of resp) {
+                    $("#cmbCustomer").append("<option >"+customer.id+"</option>");
+                    const customerDetails={
+                        id:customer.id,
+                        name:customer.name,
+                        address:customer.address,
+                        salary:customer.salary
+                    }
+                    customerDB.push(customerDetails);
+                }
+            }
+        });
+    }else {
+        $("#cmbCustomer").empty();
+        for (let i = 0; i < customerDB.length; i++) {
+            let id = customerDB[i].id;
+            $("#cmbCustomer").append("<option >" + id + "</option>");
+        }
     }
 }
 
 $("#cmbCustomer").click(function () {
-    var customer = searchCustomer($(this).val());
+    const customer = searchCustomer($(this).val());
     $("#txtCustomerName").val(customer.name);
     $("#txtCustomerAddress").val(customer.address);
     $("#txtCustomerSalary").val(customer.salary);
@@ -50,10 +71,32 @@ $("#cmbCustomer").click(function () {
 });
 
 function loadItemsCodes(){
-    $("#cmdItems").empty();
-    for (let i = 0; i <itemDB.length ; i++) {
-        let id=itemDB[i].code;
-        $("#cmdItems").append("<option >"+id +"</option>");
+    if (itemDB.length==0) {
+        $("#cmdItems").empty();
+        $.ajax({
+            url:"http://localhost:8080/app/items",
+            method:"GET",
+            dataType:"json",
+            success:function (resp){
+                for (const item of resp) {
+                    $("#cmdItems").append("<option >"+item.code +"</option>");
+
+                    const itemDetails={
+                        code:item.code,
+                        description:item.description,
+                        qtyOnHand:item.qtyOnHand,
+                        unitPrice:item.unitPrice
+                    };
+                    itemDB.push(itemDetails);
+                }
+            }
+        });
+    }else {
+        $("#cmdItems").empty();
+        for (let i = 0; i < itemDB.length; i++) {
+            let id = itemDB[i].code;
+            $("#cmdItems").append("<option >" + id + "</option>");
+        }
     }
 }
 
@@ -118,7 +161,7 @@ function placeOrder(){
     if(searchOrder(orderId.trim()) == undefined) {
         let cusId = $("#cmbCustomer").val();
         let date = $("#txtDate").val();
-        let total = $("#txtSubtotal").val();
+        let total = $("#txtSubtotal").text();
 
         let orderDetailArray = [];
         let code = "";
@@ -130,10 +173,10 @@ function placeOrder(){
             price = $(this).children().eq(2).text();
 
             let orderDetail = {
-                oid: orderId,
-                code: code,
+                orderID: orderId,
+                itemCode: code,
                 qty: qty,
-                unitPrice: price
+                price: price
             };
             orderDetailArray.push(orderDetail);
         });
@@ -145,7 +188,10 @@ function placeOrder(){
             total: total,
             orderDetails: orderDetailArray
         };
+        console.log(placeOrder);
         const jsonObject = JSON.stringify(placeOrder);
+        console.log(jsonObject);
+
         $.ajax({
             url: "http://localhost:8080/app/placeorders",
             method: "POST",
@@ -242,16 +288,17 @@ function setCurrentDate(){
 function loadOrderIDs(){
     $("#cmbOrderID").empty();
     $.ajax({
-        url:"http://localhost:8080/app/orders",
+        url:"http://localhost:8080/app/placeorders",
         method:"GET",
         dataType:"json",
         success:function (resp){
             for (const order of resp) {
-                $("#cmbOrderID").append("<option >"+order.oid+"</option>");
+                console.log(resp);
+                $("#cmbOrderID").append("<option >"+order.orderID+"</option>");
                 const orderDetails={
-                    oid:order.oid,
+                    oid:order.orderID,
                     date:order.date,
-                    customerID:order.id,
+                    customerID:order.customerID,
                     total: order.total,
                     orderDetails:order.orderDetails
                 };
@@ -272,9 +319,9 @@ $("#cmbOrderID").click(function () {
             $("#txtCustomer").val(id);
 
             for (let j = 0; j < orderDB[i].orderDetails.length; j++) {
-                let code = orderDB[i].orderDetails[j].code;
+                let code = orderDB[i].orderDetails[j].itemCode;
                 let qty = orderDB[i].orderDetails[j].qty;
-                let price = orderDB[i].orderDetails[j].unitPrice;
+                let price = orderDB[i].orderDetails[j].price;
 
                 let row = `<tr>
                     <td>${orderID}</td>

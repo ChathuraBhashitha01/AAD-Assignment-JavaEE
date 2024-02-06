@@ -118,25 +118,33 @@ function bindTrEvents() {
     });
 }
 function loadItemCodes(){
-    $("#cmbItemCode").empty();
-    $.ajax({
-        url:"http://localhost:8080/app/items",
-        method:"GET",
-        dataType:"json",
-        success:function (resp){
-            for (const item of resp) {
-                $("#cmbItemCode").append("<option >"+item.code +"</option>");
+    if (itemDB.length==0){
+        $("#cmbItemCode").empty();
+        $.ajax({
+            url: "http://localhost:8080/app/items",
+            method: "GET",
+            dataType: "json",
+            success: function (resp) {
+                for (const item of resp) {
+                    $("#cmbItemCode").append("<option >" + item.code + "</option>");
 
-                const itemDetails={
-                    code:item.code,
-                    description:item.description,
-                    qtyOnHand:item.qtyOnHand,
-                    unitPrice:item.unitPrice
-                };
-                itemDB.push(itemDetails);
+                    const itemDetails = {
+                        code: item.code,
+                        description: item.description,
+                        qtyOnHand: item.qtyOnHand,
+                        unitPrice: item.unitPrice
+                    };
+                    itemDB.push(itemDetails);
+                }
             }
+        });
+    }else {
+        $("#cmbItemCode").empty();
+        for (let i = 0; i < itemDB.length; i++) {
+            let id = itemDB[i].code;
+            $("#cmdItems").append("<option >" + id + "</option>");
         }
-    });
+    }
 }
 
 function deleteItem(){

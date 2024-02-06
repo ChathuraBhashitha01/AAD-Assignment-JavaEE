@@ -123,26 +123,32 @@ function bindCusTrEvents() {
     });
 }
 function loadCustomerIDs(){
-    $("#cmbCustomerID").empty();
-    $.ajax({
-        url:"http://localhost:8080/app/customers",
-        method:"GET",
-        dataType:"json",
-        success:function (resp){
-            console.log("Success : ",resp)
-
-            for (const customer of resp) {
-                $("#cmbCustomerID").append("<option >"+customer.id+"</option>");
-                const customerDetails={
-                    id:customer.id,
-                    name:customer.name,
-                    address:customer.address,
-                    salary:customer.salary
+    if(customerDB.length==0) {
+        $("#cmbCustomerID").empty();
+        $.ajax({
+            url: "http://localhost:8080/app/customers",
+            method: "GET",
+            dataType: "json",
+            success: function (resp) {
+                for (const customer of resp) {
+                    $("#cmbCustomerID").append("<option >" + customer.id + "</option>");
+                    const customerDetails = {
+                        id: customer.id,
+                        name: customer.name,
+                        address: customer.address,
+                        salary: customer.salary
+                    }
+                    customerDB.push(customerDetails);
                 }
-                customerDB.push(customerDetails);
             }
+        });
+    }else {
+        $("#cmbCustomerID").empty();
+        for (let i = 0; i < customerDB.length; i++) {
+            let id = customerDB[i].id;
+            $("#cmbCustomerID").append("<option >" + id + "</option>");
         }
-    });
+    }
 }
 function deleteCustomer(){
     let id=$("#cusId").val();

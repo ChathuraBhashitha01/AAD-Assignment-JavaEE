@@ -63,7 +63,7 @@ public class PlaceOrderBOImpl implements PlaceOrderBO {
                     return false;
                 }
 
-                Item item= (Item) itemDAO.searchByID(entity.getItemCode(), connection);
+                Item item=itemDAO.searchByID(entity.getItemCode(), connection);
                 item.setQtyOnHand(item.getQtyOnHand()-entity.getQty());
 
                 boolean isUpdate = itemDAO.update(item, connection);
