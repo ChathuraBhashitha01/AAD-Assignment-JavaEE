@@ -37,7 +37,6 @@ $("#imgItem").click(function (){
 $("#btnItemSave").click(function (){
     if (checkAll()) {
         saveItem();
-        loadItemCodes();
         clearItemInputField();
     }
     else {
@@ -51,13 +50,11 @@ $("#btnItemGetAll").click(function (){
 
 $("#btnItemDelete").click(function (){
     deleteItem();
-    loadItemCodes();
     clearItemInputField();
 });
 
 $("#btnItemUpdate").click(function (){
     updateItem();
-    loadItemCodes();
     clearItemInputField();
 });
 
@@ -99,6 +96,7 @@ function saveItem() {
                     // alert(jqxhr.responseText);
                     alert("Added Item successfully");
                 }
+                loadItemCodes();
             }
         });
 
@@ -165,6 +163,7 @@ function deleteItem(){
                         // alert(jqxhr.responseText);
                         alert("Delete Item successfully");
                     }
+                    loadItemCodes();
                 }
             });
         }
@@ -200,6 +199,7 @@ function updateItem(){
                         // alert(jqxhr.responseText);
                         alert("Update Item successfully");
                     }
+                    loadItemCodes();
                 }
             });
         }

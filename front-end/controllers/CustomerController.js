@@ -36,7 +36,6 @@ $("#imgCustomer").click(function () {
 $("#btnSaveCustomer").click(function (){
     if (checkCustomerAll()) {
         saveCustomer();
-        loadCustomerIDs();
         clearCustomerInputField();
     }
     else {
@@ -50,13 +49,11 @@ $("#btnCustomerGetAll").click(function (){
 
 $("#btnCustomerDelete").click(function (){
     deleteCustomer();
-    loadCustomerIDs();
     clearCustomerInputField();
 });
 
 $("#btnCustomerUpdate").click(function (){
     updateCustomer();
-    loadCustomerIDs();
     clearCustomerInputField();
 });
 
@@ -101,6 +98,7 @@ function saveCustomer() {
                     // alert(jqxhr.responseText);
                     alert("Added customer successfully");
                 }
+                loadCustomerIDs();
             },
             error: function (error){
                 console.log("Error",error);
@@ -166,6 +164,7 @@ function deleteCustomer(){
                         // alert(jqxhr.responseText);
                         alert("Delete customer successfully");
                     }
+                    loadCustomerIDs();
                 },
                 error: function (error) {
 
@@ -207,6 +206,7 @@ function updateCustomer(){
                         // alert(jqxhr.responseText);
                         alert("Update customer successfully");
                     }
+                    loadCustomerIDs();
                 },
                 error: function (error) {
                     console.log("Error", error);
