@@ -1,18 +1,18 @@
 # AAD-Assignment-JavaEE
-# <h3>Fullstack Application</h3>
+# <h2>Fullstack Application</h2>
 
-# Technologies
+# <h2>Technologies</h2>
 
-# Front-End
+# <h2>Front-End</h2>
 
-# HTML
-# CSS
-# JavaScript
-# jQuery
-# Bootstrap
+# <h4>HTML</h4>
+# <h4>CSS</h4>
+# <h4>JavaScript</h4>
+# <h4>jQuery</h4>
+# <h4>Bootstrap</h4>
 
-# Back-End
+# <h2>Back-End</h2>
 
-# JavaEE
-# MySQL
-# Tomcat Server
+# <h4>JavaEE</h4>
+# <h4>MySQL</h4>
+# <h4>Tomcat Server</h4>
