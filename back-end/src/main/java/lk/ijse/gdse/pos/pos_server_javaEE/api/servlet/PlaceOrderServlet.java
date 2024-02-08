@@ -63,4 +63,5 @@ public class PlaceOrderServlet extends HttpServlet {
 
         resp.getWriter().write(id);
     }
+
 }

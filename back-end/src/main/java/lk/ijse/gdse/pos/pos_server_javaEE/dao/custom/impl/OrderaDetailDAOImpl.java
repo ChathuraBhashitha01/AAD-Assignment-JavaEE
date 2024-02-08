@@ -42,7 +42,7 @@ public class OrderaDetailDAOImpl implements OrderDetailsDAO {
         ArrayList<OrderDetail> orders=new ArrayList<>();
         String sql="SELECT * FROM orderdetail WHERE orderID=?";
         ResultSet resultSet= SQLUtil.execute(sql,connection,id);
-        if(resultSet.next()){
+        while (resultSet.next()){
            orders.add(new OrderDetail(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getDouble(4)));
         }
         return orders;
