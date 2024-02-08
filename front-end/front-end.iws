@@ -4,12 +4,13 @@
     <list default="true" id="3e01bae3-761e-408e-8937-46617a3b0c32" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/ItemServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/ItemServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/CustomerServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/CustomerServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/ItemServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/ItemServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CustomerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CustomerController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ItemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ItemController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end.iws" beforeDir="false" afterPath="$PROJECT_DIR$/front-end.iws" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +55,19 @@
       <recent name="C:\GDSE 66\AAD-Assignment-JavaEE\front-end\assest\bootstrap\css" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -72,7 +86,7 @@
       <workItem from="1707235701924" duration="7442000" />
       <workItem from="1707297632264" duration="1335000" />
       <workItem from="1707317736719" duration="15238000" />
-      <workItem from="1707369570311" duration="14107000" />
+      <workItem from="1707369570311" duration="14931000" />
     </task>
     <servers />
   </component>

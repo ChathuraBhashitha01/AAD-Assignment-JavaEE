@@ -35,7 +35,6 @@ $("#btnPurchase").click(function (){
 })
 
 function loadCustomer(){
-    // if (customerDB.length==0) {
        $("#cmbCustomer").empty();
         customerDB.slice(0,customerDB.length)
         $.ajax({
@@ -55,13 +54,6 @@ function loadCustomer(){
                 }
             }
         });
-    // }else {
-    //     $("#cmbCustomer").empty();
-    //     for (let i = 0; i < customerDB.length; i++) {
-    //         let id = customerDB[i].id;
-    //         $("#cmbCustomer").append("<option >" + id + "</option>");
-    //     }
-    //}
 }
 
 $("#cmbCustomer").click(function () {
@@ -74,7 +66,6 @@ $("#cmbCustomer").click(function () {
 });
 
 function loadItems(){
-    //if (itemDB.length==0) {
         $("#cmdItems").empty();
         itemDB.length=0;
         $.ajax({
@@ -95,13 +86,7 @@ function loadItems(){
                 }
             }
         });
-    // }else {
-    //     $("#cmdItems").empty();
-    //     for (let i = 0; i < itemDB.length; i++) {
-    //         let id = itemDB[i].code;
-    //         $("#cmdItems").append("<option >" + id + "</option>");
-    //     }
-    // }
+
 }
 
 $("#cmdItems").click(function () {
