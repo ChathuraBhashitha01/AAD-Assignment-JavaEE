@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e01bae3-761e-408e-8937-46617a3b0c32" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/PlaceOrderBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/PlaceOrderBOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/OrderBOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/OrderBOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/OrderBOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/bo/custom/impl/OrderBOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/api/servlet/PlaceOrderServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/src/main/java/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/back-end-1.0-SNAPSHOT/WEB-INF/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/target/classes/lk/ijse/gdse/pos/pos_server_javaEE/dao/custom/impl/OrderaDetailDAOImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/CustomerController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/CustomerController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/ItemController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ItemController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
@@ -67,7 +68,11 @@
       <workItem from="1707058603450" duration="12448000" />
       <workItem from="1707148931607" duration="4086000" />
       <workItem from="1707160476585" duration="1827000" />
-      <workItem from="1707205968071" duration="8505000" />
+      <workItem from="1707205968071" duration="11212000" />
+      <workItem from="1707235701924" duration="7442000" />
+      <workItem from="1707297632264" duration="1335000" />
+      <workItem from="1707317736719" duration="15238000" />
+      <workItem from="1707369570311" duration="14107000" />
     </task>
     <servers />
   </component>

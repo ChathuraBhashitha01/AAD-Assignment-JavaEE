@@ -1,7 +1,27 @@
-
-loadCustomerIDs();
+function loadCustomerIDs(){
+    $("#cmbCustomerID").empty();
+    customerDB.length=0;
+    $.ajax({
+        url: "http://localhost:8080/app/customers",
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (const customer of resp) {
+                $("#cmbCustomerID").append("<option >" + customer.id + "</option>");
+                const customerDetails = {
+                    id: customer.id,
+                    name: customer.name,
+                    address: customer.address,
+                    salary: customer.salary
+                }
+                customerDB.push(customerDetails);
+            }
+        }
+    });
+}
 
 $("#navCustomer").click(function (){
+    loadCustomerIDs();
     $("#navCustomer").css( "font-weight","bold")
     $("#navPlaceOrder").css( "font-weight","normal")
     $("#navHome").css( "font-weight","normal")
@@ -9,9 +29,15 @@ $("#navCustomer").click(function (){
     $("#btnOrderDetails").css('display','none');
 });
 
+$("#imgCustomer").click(function () {
+    loadCustomerIDs();
+});
+
 $("#btnSaveCustomer").click(function (){
     if (checkCustomerAll()) {
         saveCustomer();
+        loadCustomerIDs();
+        clearCustomerInputField();
     }
     else {
         alert("Faild Saved");
@@ -19,23 +45,7 @@ $("#btnSaveCustomer").click(function (){
 });
 
 $("#btnCustomerGetAll").click(function (){
-    $("#tblCustomer").empty();
-
-    for (let i = 0; i < customerDB.length; i++) {
-        let customerId=customerDB[i].id;
-        let customerName=customerDB[i].name;
-        let customerAddress=customerDB[i].address;
-        let customerSalary=customerDB[i].salary;
-
-        let row=`<tr>
-                    <td>${customerId}</td>
-                    <td>${customerName}</td>
-                    <td>${customerAddress}</td>
-                    <td>${customerSalary}</td>
-                </tr>`;
-        $("#tblCustomer").append(row);
-        bindCusTrEvents();
-    }
+    getAllCustomers();
 });
 
 $("#btnCustomerDelete").click(function (){
@@ -85,18 +95,18 @@ function saveCustomer() {
             data:jsonObject,
             contentType:("application/json"),
 
-            success: function (resp,jqxhr){
+            success: function (resp, textStatus, jqxhr){
                 console.log("Success",resp);
-                if (jqxhr.status==201){
-                    alert(jqxhr.responseText);
+                if (jqxhr.status == 201) {
+                    // alert(jqxhr.responseText);
+                    alert("Added customer successfully");
                 }
             },
             error: function (error){
                 console.log("Error",error);
             }
         });
-         loadCustomerIDs();
-         clearCustomerInputField();
+
     }
     else {
         alert("Customer already exits.!");
@@ -108,6 +118,24 @@ function searchCustomer(id){
     return customerDB.find(function (customer){
         return customer.id==id;
     });
+}
+function getAllCustomers(){
+    $("#tblCustomer").empty();
+    for (let i = 0; i < customerDB.length; i++) {
+        let customerId=customerDB[i].id;
+        let customerName=customerDB[i].name;
+        let customerAddress=customerDB[i].address;
+        let customerSalary=customerDB[i].salary;
+
+        let row=`<tr>
+                    <td>${customerId}</td>
+                    <td>${customerName}</td>
+                    <td>${customerAddress}</td>
+                    <td>${customerSalary}</td>
+                </tr>`;
+        $("#tblCustomer").append(row);
+        bindCusTrEvents();
+    }
 }
 function bindCusTrEvents() {
     $("#tblCustomer>tr").click(function (){
@@ -122,34 +150,7 @@ function bindCusTrEvents() {
         $("#cusSalary").val(salary)
     });
 }
-function loadCustomerIDs(){
-    if(customerDB.length==0) {
-        $("#cmbCustomerID").empty();
-        $.ajax({
-            url: "http://localhost:8080/app/customers",
-            method: "GET",
-            dataType: "json",
-            success: function (resp) {
-                for (const customer of resp) {
-                    $("#cmbCustomerID").append("<option >" + customer.id + "</option>");
-                    const customerDetails = {
-                        id: customer.id,
-                        name: customer.name,
-                        address: customer.address,
-                        salary: customer.salary
-                    }
-                    customerDB.push(customerDetails);
-                }
-            }
-        });
-    }else {
-        $("#cmbCustomerID").empty();
-        for (let i = 0; i < customerDB.length; i++) {
-            let id = customerDB[i].id;
-            $("#cmbCustomerID").append("<option >" + id + "</option>");
-        }
-    }
-}
+
 function deleteCustomer(){
     let id=$("#cusId").val();
     if (searchCustomer(id) == undefined) {
@@ -160,9 +161,10 @@ function deleteCustomer(){
             $.ajax({
                 url: "http://localhost:8080/app/customers?id=" + id,
                 method: "DELETE",
-                success: function (resp, jqxhr) {
+                success: function (resp, textStatus, jqxhr) {
                     if (jqxhr.status == 201) {
-                        alert(jqxhr.responseText);
+                        // alert(jqxhr.responseText);
+                        alert("Delete customer successfully");
                     }
                 },
                 error: function (error) {
@@ -177,6 +179,7 @@ function updateCustomer(){
     let id=$("#cusId").val();
 
     if (searchCustomer(id) == undefined) {
+        clearCustomerInputField();
         alert("No such Customer..please check the ID");
     } else {
         let consent = confirm("Do you really want to update this customer.?");
@@ -199,9 +202,10 @@ function updateCustomer(){
                 data: jsonObject,
                 contentType: ("application/json"),
 
-                success: function (resp, jqxhr) {
+                success: function (resp, textStatus, jqxhr) {
                     if (jqxhr.status == 201) {
-                        alert(jqxhr.responseText);
+                        // alert(jqxhr.responseText);
+                        alert("Update customer successfully");
                     }
                 },
                 error: function (error) {
@@ -211,3 +215,4 @@ function updateCustomer(){
         }
     }
 };
+

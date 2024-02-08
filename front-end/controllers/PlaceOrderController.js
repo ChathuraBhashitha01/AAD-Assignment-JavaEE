@@ -1,24 +1,26 @@
-loadCustomerIDs();
-loadItemsCodes();
-loadOrderIDs();
-genarateOrderIDs();
-
-setCurrentDate();
-
 $("#navPlaceOrder").click(function (){
-    // loadCustomerIDs();
-    // loadItemsCodes();
+    // loadOrderIDs();
+    // loadItemCodes();
     $("#navPlaceOrder").css( "font-weight","bold")
     $("#navCustomer").css( "font-weight","normal")
     $("#navItem").css( "font-weight","normal")
     $("#navHome").css( "font-weight","normal")
     $("#btnOrderDetails").css('display','block');
     $("#frmOrderDetails").css('display','none');
+    loadItems();
+    genarateOrderIDs();
+    loadCustomer();
+    setCurrentDate();
+});
+
+$("#imgPlaceOrder").click(function (){
+    loadItems();
+    loadCustomer();
 });
 
 $("#btnOrderDetails").click(function (){
-    $("#frmOrderDetails").css('display','block');
     loadOrderIDs();
+    $("#frmOrderDetails").css('display','block');
 });
 
 $("#btnOrderDetailBack").click(function (){
@@ -32,9 +34,10 @@ $("#btnPurchase").click(function (){
     setCurrentDate();
 })
 
-function loadCustomerIDs(){
-    if (customerDB.length==0) {
-        $("#cmbCustomer").empty();
+function loadCustomer(){
+    // if (customerDB.length==0) {
+       $("#cmbCustomer").empty();
+        customerDB.slice(0,customerDB.length)
         $.ajax({
             url:"http://localhost:8080/app/customers",
             method:"GET",
@@ -52,13 +55,13 @@ function loadCustomerIDs(){
                 }
             }
         });
-    }else {
-        $("#cmbCustomer").empty();
-        for (let i = 0; i < customerDB.length; i++) {
-            let id = customerDB[i].id;
-            $("#cmbCustomer").append("<option >" + id + "</option>");
-        }
-    }
+    // }else {
+    //     $("#cmbCustomer").empty();
+    //     for (let i = 0; i < customerDB.length; i++) {
+    //         let id = customerDB[i].id;
+    //         $("#cmbCustomer").append("<option >" + id + "</option>");
+    //     }
+    //}
 }
 
 $("#cmbCustomer").click(function () {
@@ -70,9 +73,10 @@ $("#cmbCustomer").click(function () {
 
 });
 
-function loadItemsCodes(){
-    if (itemDB.length==0) {
+function loadItems(){
+    //if (itemDB.length==0) {
         $("#cmdItems").empty();
+        itemDB.length=0;
         $.ajax({
             url:"http://localhost:8080/app/items",
             method:"GET",
@@ -91,13 +95,13 @@ function loadItemsCodes(){
                 }
             }
         });
-    }else {
-        $("#cmdItems").empty();
-        for (let i = 0; i < itemDB.length; i++) {
-            let id = itemDB[i].code;
-            $("#cmdItems").append("<option >" + id + "</option>");
-        }
-    }
+    // }else {
+    //     $("#cmdItems").empty();
+    //     for (let i = 0; i < itemDB.length; i++) {
+    //         let id = itemDB[i].code;
+    //         $("#cmdItems").append("<option >" + id + "</option>");
+    //     }
+    // }
 }
 
 $("#cmdItems").click(function () {
@@ -209,6 +213,7 @@ function placeOrder(){
             }
         });
         clearCustomerInputField();
+        genarateOrderIDs();
     }else {
         alert("Order id already exits.!");
         clearCustomerInputField();
@@ -249,24 +254,14 @@ function setBalance() {
     }
 }
 
-let idCounts=1;
 function genarateOrderIDs(){
-    if (orderDB.length==0){
-        $("#txtOrderId").val("OR00-001");
-    }else {
-        if (orderDB.length > 0) {
-            idCounts++;
-            $("#txtOrderId").val("OR00-00" + idCounts);
+    $.ajax({
+        url:"http://localhost:8080/app/placeorders",
+        method:"GET",
+        success:function (resp){
+            $("#txtOrderId").val(resp);
         }
-        if (orderDB.length >= 10) {
-            idCounts++;
-            $("#txtOrderId").val("OR00-0" + idCounts);
-        }
-        if (orderDB.length >= 100) {
-            idCounts++;
-            $("#txtOrderId").val("OR00-" + idCounts);
-        }
-    }
+    });
 }
 
 function removeEvent() {
@@ -276,10 +271,6 @@ function removeEvent() {
 }
 
 function setCurrentDate(){
-    // let currentdate = new Date();
-    // let date =currentdate.getDay() + "/" + currentdate.getMonth()
-    //     + "/" + currentdate.getFullYear();
-
     const dateString = new Date(Date.now()).toLocaleString();
     const todaysDate = dateString.slice(0,3).match(/[0-9]/i) ? dateString.split(' ')[0].split(',')[0] : dateString.split(' ')[1] + " " + dateString.split(' ')[2] + " " + dateString.split(' ')[3];
     $("#txtDate").val(todaysDate);
@@ -288,7 +279,7 @@ function setCurrentDate(){
 function loadOrderIDs(){
     $("#cmbOrderID").empty();
     $.ajax({
-        url:"http://localhost:8080/app/placeorders",
+        url:"http://localhost:8080/app/orders",
         method:"GET",
         dataType:"json",
         success:function (resp){

@@ -1,6 +1,28 @@
-loadItemCodes();
+function loadItemCodes(){
+    $("#cmbItemCode").empty();
+    itemDB.length=0;
+    $.ajax({
+        url: "http://localhost:8080/app/items",
+        method: "GET",
+        dataType: "json",
+        success: function (resp) {
+            for (const item of resp) {
+                $("#cmbItemCode").append("<option >" + item.code + "</option>");
+
+                const itemDetails = {
+                    code: item.code,
+                    description: item.description,
+                    qtyOnHand: item.qtyOnHand,
+                    unitPrice: item.unitPrice
+                };
+                itemDB.push(itemDetails);
+            }
+        }
+    });
+}
 
 $("#navItem").click(function (){
+    loadItemCodes();
     $("#navCustomer").css( "font-weight","normal")
     $("#navPlaceOrder").css( "font-weight","normal")
     $("#navHome").css( "font-weight","normal")
@@ -8,9 +30,15 @@ $("#navItem").click(function (){
     $("#btnOrderDetails").css('display','none');
 });
 
+$("#imgItem").click(function (){
+    loadItemCodes();
+});
+
 $("#btnItemSave").click(function (){
     if (checkAll()) {
         saveItem();
+        loadItemCodes();
+        clearItemInputField();
     }
     else {
         alert("Faild Saved");
@@ -18,23 +46,7 @@ $("#btnItemSave").click(function (){
 });
 
 $("#btnItemGetAll").click(function (){
-    $("#tblItem").empty();
-
-    for (let i = 0; i < itemDB.length; i++) {
-        let code=itemDB[i].code;
-        let name=itemDB[i].description;
-        let price=itemDB[i].unitPrice;
-        let qty=itemDB[i].qtyOnHand;
-
-        let row=`<tr>
-                    <td>${code}</td>
-                    <td>${name}</td>
-                    <td>${price}</td>
-                    <td>${qty}</td>
-                </tr>`;
-        $("#tblItem").append(row);
-        bindTrEvents();
-    }
+  getAllItems();
 });
 
 $("#btnItemDelete").click(function (){
@@ -84,13 +96,12 @@ function saveItem() {
 
             success:function (resp,jqxhr){
                 if (jqxhr.status==201){
-                    alert(jqxhr.responseText);
+                    // alert(jqxhr.responseText);
+                    alert("Added Item successfully");
                 }
             }
         });
 
-        loadItemCodes();
-        clearItemInputField();
     }
     else {
         alert("Item already exits.!");
@@ -102,6 +113,26 @@ function searchItem(code){
     return itemDB.find(function(item){
         return item.code==code;
     });
+}
+
+function getAllItems(){
+    $("#tblItem").empty();
+
+    for (let i = 0; i < itemDB.length; i++) {
+        let code=itemDB[i].code;
+        let name=itemDB[i].description;
+        let price=itemDB[i].unitPrice;
+        let qty=itemDB[i].qtyOnHand;
+
+        let row=`<tr>
+                    <td>${code}</td>
+                    <td>${name}</td>
+                    <td>${price}</td>
+                    <td>${qty}</td>
+                </tr>`;
+        $("#tblItem").append(row);
+        bindTrEvents();
+    };
 }
 
 function bindTrEvents() {
@@ -117,35 +148,6 @@ function bindTrEvents() {
         $("#txtItemQty").val(qty)
     });
 }
-function loadItemCodes(){
-    if (itemDB.length==0){
-        $("#cmbItemCode").empty();
-        $.ajax({
-            url: "http://localhost:8080/app/items",
-            method: "GET",
-            dataType: "json",
-            success: function (resp) {
-                for (const item of resp) {
-                    $("#cmbItemCode").append("<option >" + item.code + "</option>");
-
-                    const itemDetails = {
-                        code: item.code,
-                        description: item.description,
-                        qtyOnHand: item.qtyOnHand,
-                        unitPrice: item.unitPrice
-                    };
-                    itemDB.push(itemDetails);
-                }
-            }
-        });
-    }else {
-        $("#cmbItemCode").empty();
-        for (let i = 0; i < itemDB.length; i++) {
-            let id = itemDB[i].code;
-            $("#cmdItems").append("<option >" + id + "</option>");
-        }
-    }
-}
 
 function deleteItem(){
     let id=$("#txtItemCode").val();
@@ -155,12 +157,13 @@ function deleteItem(){
         let consent = confirm("Do you really want to Delete this item.?");
         if (consent) {
             $.ajax({
-                url: "http://localhost:8080/app/items?id=" + id,
+                url: "http://localhost:8080/app/items?code=" + id,
                 method: "DELETE",
 
                 success: function (resp, jqxhr) {
                     if (jqxhr.status == 201) {
-                        alert(jqxhr.responseText);
+                        // alert(jqxhr.responseText);
+                        alert("Delete Item successfully");
                     }
                 }
             });
@@ -186,7 +189,7 @@ function updateItem(){
                 qtyOnHand: qty
             };
 
-            const jsonObject = JSON.stringify(newItem);
+            const jsonObject = JSON.stringify(newItem); 
             $.ajax({
                 url: "http://localhost:8080/app/items",
                 method: "PUT",
@@ -194,7 +197,8 @@ function updateItem(){
 
                 success: function (resp, jqxhr) {
                     if (jqxhr.status == 201) {
-                        alert(jqxhr.responseText);
+                        // alert(jqxhr.responseText);
+                        alert("Update Item successfully");
                     }
                 }
             });
