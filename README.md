@@ -1,4 +1,4 @@
-# AAD-Assignment-JavaEE
+# Point of Sale System-JavaEE
 
 ## Fullstack Application
 A Point of Sale application is a versatile online tool that empowers businesses to efficiently handle their sales transactions. This intuitive software operates through a web browser, providing a seamless experience for managing orders, items and maintaining a centralized system for customer information. This project serves as an educational resource to enhance understanding of Java EE development.
