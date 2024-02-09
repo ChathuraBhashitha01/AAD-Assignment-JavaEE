@@ -1,3 +1,4 @@
+genarateOrderIDs();
 $("#navPlaceOrder").click(function (){
     // loadOrderIDs();
     // loadItemCodes();
@@ -8,7 +9,6 @@ $("#navPlaceOrder").click(function (){
     $("#btnOrderDetails").css('display','block');
     $("#frmOrderDetails").css('display','none');
     loadItems();
-    genarateOrderIDs();
     loadCustomer();
     setCurrentDate();
 });
@@ -30,7 +30,6 @@ $("#btnOrderDetailBack").click(function (){
 $("#btnPurchase").click(function (){
     placeOrder();
     clearPlaceOrderInputField();
-    genarateOrderIDs();
     setCurrentDate();
 })
 
@@ -192,6 +191,7 @@ function placeOrder(){
                 if (jqxhr.status == 201) {
                     alert(jqxhr.responseText);
                 }
+                genarateOrderIDs();
             },
             error: function (error) {
                 console.log("Error", error);

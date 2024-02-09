@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e01bae3-761e-408e-8937-46617a3b0c32" name="Default Changelist" comment="" />
+    <list default="true" id="3e01bae3-761e-408e-8937-46617a3b0c32" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/controllers/PlaceOrderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/PlaceOrderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end.iws" beforeDir="false" afterPath="$PROJECT_DIR$/front-end.iws" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,7 +68,7 @@
       <workItem from="1707317736719" duration="15238000" />
       <workItem from="1707369570311" duration="16709000" />
       <workItem from="1707407039008" duration="4098000" />
-      <workItem from="1707497014019" duration="2629000" />
+      <workItem from="1707497014019" duration="5075000" />
     </task>
     <servers />
   </component>
